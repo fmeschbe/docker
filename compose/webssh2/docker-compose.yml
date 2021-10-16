@@ -1,0 +1,19 @@
+version: "2.1"
+
+networks:
+  default:
+    name: dmz
+    external: true
+
+volumes:
+  config:
+
+services:
+  webssh2:
+    container_name: webssh2
+    image: 'webssh2:latest'
+    restart: unless-stopped
+    volumes:
+      - config:/config
+    environment:
+      # DEBUG: "WebSSH2,ssh2"

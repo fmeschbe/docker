@@ -1,0 +1,40 @@
+version: "2.1"
+
+networks:
+  default:
+    name: dmz
+    external: true
+
+volumes:
+  registry:
+
+services:
+  registry:
+    image: registry:2
+    restart: unless-stopped
+    # no ports mapped .. will be behind proxy
+    ports: []
+    environment:
+      REGISTRY_HTTP_PORT: 5000
+      REGISTRY_STORAGE_DELETE_ENABLED: "true"
+      OFF_REGISTRY_HTTP_PREFIX: /my/nested/registry/
+    volumes:
+      - registry:/var/lib/registry
+
+  registry_browser:
+    container_name: registry-browser
+    restart: unless-stopped
+    image: registry.meschberger.ch/klausmeyer/docker-registry-browser:1.4-fmeschbe
+    # no ports mapped .. will be behind proxy
+    ports: []
+    environment:
+      ENV_DOCKER_REGISTRY_HOST: "registry"
+      ENV_DOCKER_REGISTRY_PORT: 5000
+      ENABLE_COLLAPSE_NAMESPACES: "false"
+      ENABLE_DELETE_IMAGES: "true"
+      RAILS_RELATIVE_URL_ROOT: "/browser"
+      SCRIPT_NAME: "/browser"
+      DOCKER_REGISTRY_URL: http://registry:5000
+      PUBLIC_REGISTRY_URL: registry.meschberger.ch
+    depends_on:
+      - registry

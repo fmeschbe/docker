@@ -1,0 +1,21 @@
+version: "2.1"
+
+networks:
+  default:
+    name: dmz
+    external: true
+
+volumes:
+  config:
+
+services:
+  nginx:
+    image: ghcr.io/linuxserver/nginx
+    container_name: twofactorauth
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - config:/config
+    restart: unless-stopped

@@ -1,0 +1,33 @@
+version: '2'
+
+networks:
+  default:
+    name: dmz
+    external: true
+  home:
+    external: true
+
+volumes:
+  config:
+  transcode:
+
+services:
+  plex:
+    container_name: plex
+    hostname: plex
+    domainname: meschberger.ch
+    image: registry.meschberger.ch/plexinc/pms-docker
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Zurich
+      - PLEX_CLAIM=claim-vxw2S9uhULXqrG-WC7pG
+    networks:
+      - default
+      - home
+    volumes:
+      - config:/config
+      - transcode:/transcode
+      - /srv/dev-disk-by-uuid-f6e03a1b-effe-4467-a219-7b88265bbe10:/data
+    devices:
+      - "/dev/dri:/dev/dri"
+#      - "/dev/dri/renderD128:/dev/dri/renderD128"

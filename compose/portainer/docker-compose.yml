@@ -1,0 +1,24 @@
+version: "2.1"
+
+networks:
+  default:
+    name: dmz
+    external: true
+
+volumes:
+  # will automatically be called portainer_data by Docker !
+  data:
+
+services:
+  portainer:
+    container_name: portainer2
+    image: 'portainer/portainer-ce'
+    restart: unless-stopped
+    ports:
+      # Do not map port used for Portainer Edge Agent tunnel
+      # - '8000:8000'
+      - '9000:9000'
+    volumes:
+      - data:/data
+      - "/var/run/docker.sock:/var/run/docker.sock"
+ 
