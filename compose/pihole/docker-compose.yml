@@ -38,6 +38,8 @@ services:
     container_name: pi-hole
     image: 'pihole/pihole:latest'
     restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
     ports:
       # Only expose the DNS Server to the host, the HTTP
       # Server is available on the dmz network for the proxy
