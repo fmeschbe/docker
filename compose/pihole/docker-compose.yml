@@ -19,7 +19,7 @@ version: "2.1"
 
 networks:
   default:
-    name: dmz
+    name: ${NETWORK:-dmz}
     external: true
   pihole:
     ipam:
