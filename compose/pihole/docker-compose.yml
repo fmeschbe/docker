@@ -43,10 +43,12 @@ services:
       # Server is available on the dmz network for the proxy
       - '53:53'
       - '53:53/udp'
-      # If the reverse proxy is not available, map the HTTP port for configuration
-      # access. By default this port should not be mapped, though, as the web
-      # control panel is accessible through the reverse proxy
-      # - '28088:80'
+      # By default Pi-Hole is intended to be exposed behind
+      # a transparent proxy gateway such as nginx. In case
+      # such a proxy is not available for some reason, set
+      # compose environment variable WEB_MAP to a port
+      # mapping to 80, e.g. "WEB_MAP=-8080:80"
+      ${WEB_MAP}
     environment:
       PIHOLE_DNS_: "172.30.0.6"
       WEBPASSWORD: "elohip"
