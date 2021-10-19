@@ -60,12 +60,13 @@ services:
     environment:
       PIHOLE_DNS_: "172.30.0.6"
       WEBPASSWORD: ${WEBPASSWORD:?WEBPASSWORD environment variable missing or not set}"
-      TZ: ${TZ:-"Europe/Zurich"}
+      DNSMASQ_LISTENING: ${DNSMASQ_LISTENING:-single}
       DHCP_ACTIVE: ${DHCP_ACTIVE:-false}
       DHCP_START: ${DHCP_START:-""}
       DHCP_END: ${DHCP_END:-""}
       DHCP_ROUTER: ${DHCP_ROUTER:-""}
       DHCP_LEASETIME: ${DHCP_LEASETIME:-24}
+      TZ: ${TZ:-"Europe/Zurich"}
     volumes:
       - pihole:/etc/pihole
       - dnsmasq:/etc/dnsmasq.d
