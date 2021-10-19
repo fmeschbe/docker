@@ -19,6 +19,11 @@ version: "2.1"
 
 networks:
   default:
+    # Refer to a specific defined network name in the docker
+    # system. By default it will be 'dmz'.
+    # Note: If the ${IP_ADDRESS} environment variable is used
+    #       this network must be defined such as to contain
+    #       the configured IP address !
     name: ${NETWORK:-dmz}
     external: true
   pihole:
@@ -61,6 +66,12 @@ services:
       default:
         aliases:
           - pihole
+        # optionally define a static IP address with an environment
+        # variable such as
+        #    IP_ADDRESS="ipv4_address: '192.168.15.2'"
+        # Note, that this requires the ${NETWORK} to be configured
+        # with a valid network address block containing this address
+        ${IP_ADDRESS}
       pihole:
         ipv4_address: "172.30.0.5"
     depends_on:
