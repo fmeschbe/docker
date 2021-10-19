@@ -29,3 +29,8 @@ services:
     dns:
       - "${DNS:-192.168.15.2}"
       - 1.1.1.1
+    healthcheck: 
+      test: "curl --connect-timeout 3 https://ipinfo.io || exit 1"
+      interval: 10m
+      timeout: 5s
+      retries: 3
