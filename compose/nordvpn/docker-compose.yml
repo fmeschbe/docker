@@ -9,6 +9,7 @@ services:
   nordvpn:
     image: ghcr.io/bubuntux/nordvpn
     container_name: nordvpn
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
     environment:        # Review https://github.com/bubuntux/nordvpn#environment-variables
