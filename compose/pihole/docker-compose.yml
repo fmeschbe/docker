@@ -19,7 +19,12 @@ version: "2.1"
 
 networks:
   default:
-    name: dmz
+    # Refer to a specific defined network name in the docker
+    # system. By default it will be 'dmz'.
+    # Note: If the ${IP_ADDRESS} environment variable is used
+    #       this network must be defined such as to contain
+    #       the configured IP address !
+    name: ${NETWORK:-dmz}
     external: true
   pihole:
     ipam:
@@ -37,7 +42,10 @@ services:
   pihole:
     container_name: pi-hole
     image: 'pihole/pihole:latest'
+    hostname: pihole
     restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
     ports:
       # Only expose the DNS Server to the host, the HTTP
       # Server is available on the dmz network for the proxy
@@ -51,14 +59,25 @@ services:
       ${WEB_MAP}
     environment:
       PIHOLE_DNS_: "172.30.0.6"
-      WEBPASSWORD: "elohip"
+      WEBPASSWORD: "${WEBPASSWORD:?WEBPASSWORD environment variable missing or not set}"
+      DNSMASQ_LISTENING: "${DNSMASQ_LISTENING:-single}"
+      DHCP_ACTIVE: "${DHCP_ACTIVE:-false}"
+      DHCP_START: "${DHCP_START}"
+      DHCP_END: "${DHCP_END}"
+      DHCP_ROUTER: "${DHCP_ROUTER}"
+      DHCP_LEASETIME: ${DHCP_LEASETIME:-24}
+      TZ: "${TZ:-Europe/Zurich}"
     volumes:
       - pihole:/etc/pihole
       - dnsmasq:/etc/dnsmasq.d
     networks:
       default:
-        aliases:
-          - pihole
+        # optionally define a static IP address with an environment
+        # variable such as
+        #    IP_ADDRESS="192.168.15.2"
+        # Note, that this requires the ${NETWORK} to be configured
+        # with a valid network address block containing this address
+        ipv4_address: "${IP_ADDRESS}"
       pihole:
         ipv4_address: "172.30.0.5"
     depends_on:
