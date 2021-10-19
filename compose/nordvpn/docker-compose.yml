@@ -1,0 +1,30 @@
+version: "3"
+
+networks:
+  vpn:
+    name: ${NETWORK:-vpn}
+    external: true
+    
+services:
+  nordvpn:
+    image: ghcr.io/bubuntux/nordvpn
+    container_name: nordvpn
+    cap_add:
+      - NET_ADMIN
+    environment:        # Review https://github.com/bubuntux/nordvpn#environment-variables
+      - "USER=${USER_NAME:?USER_NAME environment variable missing or not set}"
+      - "PASS=${PASSWORD:?PASSWORD environment variable missing or not set}"
+      - "CONNECT=${NORDVPN_CONNECT}"
+      - "TECHNOLOGY=${NORDVPN_TECHNOLOGY:-NordLynx}"
+      - "DNS=${DNS:-192.168.15.2},1.1.1.1"
+      - "FIREWALL=${NORDVPN_FIREWALL:-enable}"
+      - "PORTS=53"
+      - "NETWORK=${NETWORK_ADDRESS:-192.168.15.0/24}"  # So it can be accessed within the local network
+      - "TZ=${TZ:-Europe/Zurich}"
+    networks:
+      default: {}
+      vpn:
+        ipv4_address: "${IP_ADDRESS}"
+    dns:
+      - "${DNS:-192.168.15.2}"
+      - 1.1.1.1
