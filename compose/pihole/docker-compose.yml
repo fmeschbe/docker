@@ -68,10 +68,10 @@ services:
           - pihole
         # optionally define a static IP address with an environment
         # variable such as
-        #    IP_ADDRESS="ipv4_address: '192.168.15.2'"
+        #    IP_ADDRESS="192.168.15.2"
         # Note, that this requires the ${NETWORK} to be configured
         # with a valid network address block containing this address
-        ${IP_ADDRESS}
+        ipv4_address: "${IP_ADDRESS}"
       pihole:
         ipv4_address: "172.30.0.5"
     depends_on:
