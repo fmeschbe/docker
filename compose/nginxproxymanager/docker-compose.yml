@@ -56,4 +56,3 @@ services:
       - mariadb:/var/lib/mysql
     networks:
       - db
- 
