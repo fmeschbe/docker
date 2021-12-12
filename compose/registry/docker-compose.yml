@@ -10,6 +10,7 @@ volumes:
 
 services:
   registry:
+    container_name: registry
     image: registry:2
     restart: unless-stopped
     # no ports mapped .. will be behind proxy
