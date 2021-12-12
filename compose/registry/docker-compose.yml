@@ -24,7 +24,7 @@ services:
   registry_browser:
     container_name: registry-browser
     restart: unless-stopped
-    image: registry.meschberger.ch/klausmeyer/docker-registry-browser:1.4-fmeschbe
+    image: klausmeyer/docker-registry-browser:latest
     # no ports mapped .. will be behind proxy
     ports: []
     environment:
