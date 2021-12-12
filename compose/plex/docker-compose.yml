@@ -20,7 +20,9 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Europe/Zurich
-      - PLEX_CLAIM=claim-vxw2S9uhULXqrG-WC7pG
+      # PLEX_CLAIM is only required on first start to link
+      # this plex instance to the plex.tv account
+      - PLEX_CLAIM="${PLEX_CLAIM}"
     networks:
       - default
       - home
@@ -30,4 +32,3 @@ services:
       - /srv/dev-disk-by-uuid-f6e03a1b-effe-4467-a219-7b88265bbe10:/data
     devices:
       - "/dev/dri:/dev/dri"
-#      - "/dev/dri/renderD128:/dev/dri/renderD128"
