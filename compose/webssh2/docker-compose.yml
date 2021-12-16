@@ -15,5 +15,5 @@ services:
     restart: unless-stopped
     volumes:
       - config:/config
-    environment:
-      # DEBUG: "WebSSH2,ssh2"
+#    environment:
+#      DEBUG: "WebSSH2,ssh2"
