@@ -53,8 +53,8 @@ services:
       # a transparent proxy gateway such as nginx. In case
       # such a proxy is not available for some reason, set
       # compose environment variable WEB_MAP to a port
-      # mapping to 80, e.g. "WEB_MAP=- '8080:80'"
-      ${WEB_MAP}
+      # mapping to 80, e.g. "8080:80"
+      - '${WEB_MAP:-54:53}'
     environment:
       PIHOLE_DNS_: "172.30.0.6"
       WEBPASSWORD: "${WEBPASSWORD:?WEBPASSWORD environment variable missing or not set}"
