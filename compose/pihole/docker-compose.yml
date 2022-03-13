@@ -1,5 +1,3 @@
-version: "2.1"
-
 #
 # Debian has DNS stub on port 53 which must be disabled:
 #
