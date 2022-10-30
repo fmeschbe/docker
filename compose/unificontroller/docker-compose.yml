@@ -25,8 +25,8 @@ services:
       - 3478:3478/udp
       - 10001:10001/udp
       - 8080:8080
-      - 8443:8443 # disabled as being proxied
-      - 1900:1900/udp #optional
+      - 8443:8443 # required in most recent controller versions
+      # - 1900:1900/udp # not used, this is the DLNA port
       - 6789:6789 #optional
       - 5514:5514/udp #optional
     sysctls:
