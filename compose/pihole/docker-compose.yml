@@ -85,6 +85,10 @@ services:
     container_name: unbound-rpi
     image: 'mvance/unbound-rpi:latest'
     restart: unless-stopped
+    ulimits:
+      nofile:
+        soft: 26000
+        hard: 26000
     volumes:
       - unbound:/opt/unbound/etc/unbound
     networks:
