@@ -1,0 +1,23 @@
+version: "3.7"
+
+networks:
+  default:
+    name: dmz
+    external: true
+
+volumes:
+  repos:
+
+services:
+  git-server:
+    build:
+      dockerfile: gitserver.Dockerfile
+      context: .
+    container_name: git-server
+    hostname: git
+    domainname: meschberger.ch
+    restart: unless-stopped
+    ports:
+      - "8880:80"
+    volumes:
+      - repos:/git
