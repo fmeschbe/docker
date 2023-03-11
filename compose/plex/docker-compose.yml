@@ -1,10 +1,7 @@
 version: '2'
 
 networks:
-  default:
-    name: dmz
-    external: true
-  home:
+  plex:
     external: true
 
 volumes:
@@ -16,19 +13,22 @@ services:
     container_name: plex
     hostname: plex
     domainname: meschberger.ch
-    image: registry.meschberger.ch/plexinc/pms-docker
+    image: lscr.io/linuxserver/plex:latest
     restart: unless-stopped
     environment:
+      - PUID=15000
+      - PGID=15000
       - TZ=Europe/Zurich
       # PLEX_CLAIM is only required on first start to link
       # this plex instance to the plex.tv account
+      - VERSION=public
       - PLEX_CLAIM="${PLEX_CLAIM}"
     networks:
-      - default
-      - home
+      plex:
+        ipv4_address: "192.168.1.192"
     volumes:
       - config:/config
       - transcode:/transcode
-      - /srv/dev-disk-by-uuid-f6e03a1b-effe-4467-a219-7b88265bbe10:/data
+      - /var/srv/shares/media:/data
     devices:
       - "/dev/dri:/dev/dri"
