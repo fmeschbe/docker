@@ -20,4 +20,4 @@ services:
     ports:
       - "8880:80"
     volumes:
-      - repos:/git
+      - repos:/var/lib/git
