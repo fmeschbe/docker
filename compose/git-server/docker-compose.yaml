@@ -10,9 +10,7 @@ volumes:
 
 services:
   git-server:
-    build:
-      dockerfile: gitserver.Dockerfile
-      context: .
+    image: registry.meschberger.ch/fmeschbe/git-server:latest
     container_name: git-server
     hostname: git
     domainname: meschberger.ch
