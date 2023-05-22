@@ -68,8 +68,8 @@ services:
       DHCP_LEASETIME: ${DHCP_LEASETIME:-24}
       TZ: "${TZ:-Europe/Zurich}"
     volumes:
-      - pihole:/etc/pihole
-      - dnsmasq:/etc/dnsmasq.d
+      - ${VOLUME_ROOT}pihole:/etc/pihole
+      - ${VOLUME_ROOT}dnsmasq:/etc/dnsmasq.d
     networks:
       default:
         # optionally define a static IP address with an environment
@@ -92,7 +92,7 @@ services:
         soft: 26000
         hard: 26000
     volumes:
-      - unbound:/opt/unbound/etc/unbound
+      - ${VOLUME_ROOT}unbound:/opt/unbound/etc/unbound
     networks:
       pihole:
         ipv4_address: "172.30.0.6"
