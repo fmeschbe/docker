@@ -25,6 +25,8 @@ networks:
     name: ${NETWORK:-dmz}
     external: true
   pihole:
+    internal: true
+    attachable: false
     ipam:
       config:
         - subnet: 172.30.0.0/16
