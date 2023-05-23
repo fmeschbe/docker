@@ -25,7 +25,6 @@ networks:
     name: ${NETWORK:-dmz}
     external: true
   pihole:
-    internal: true
     attachable: false
     ipam:
       config:
