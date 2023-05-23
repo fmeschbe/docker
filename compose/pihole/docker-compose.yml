@@ -85,8 +85,8 @@ services:
       - unbound
 
   unbound:
-    container_name: unbound-rpi
-    image: 'mvance/unbound-rpi:latest'
+    container_name: unbound
+    image: '${IMAGE_UNBOUND:-mvance/unbound-rpi}:latest'
     pull_policy: always
     restart: unless-stopped
     ulimits:
