@@ -20,7 +20,7 @@ services:
       - MEM_STARTUP=1024 #optional
       - VIRTUAL_HOST=unifi.meschberger.ch
     volumes:
-      - config:/config
+      - ${VOLUME_ROOT}config:/config
     ports:
       - 3478:3478/udp
       - 10001:10001/udp
