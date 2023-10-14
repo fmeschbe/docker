@@ -21,9 +21,18 @@ fi
 file_env 'UNIFI_MONGO_USER'
 file_env 'UNIFI_MONGO_PASS'
 
-for suffix in "" "_stat" ; do 
-  __DB__="${UNIFI_MONGO_DBNAME}${suffix}"
-  echo "Creating user ${UNIFI_MONGO_USER} in DB ${__DB__}"
-  __SCRIPT__="db.createUser({user: \"${UNIFI_MONGO_USER}\", pwd: \"${UNIFI_MONGO_PASS}\", roles: [{role: \"readWrite\", db: \"${__DB__}\"}]});"
-  "${mongo[@]}" "${__DB__}" --eval "${__SCRIPT__}"
-done
+echo "Creating user ${UNIFI_MONGO_USER}"
+_SCRIPT__="db.createUser({
+	  user: \"${UNIFI_MONGO_USER}\",
+	  pwd: \"${UNIFI_MONGO_PASS}\",
+	  roles: [
+		{
+			role: \"dbOwner\",
+			db: \"${UNIFI_MONGO_DBNAME}\"
+		},
+		{
+			role: \"dbOwner\",
+			db: \"${UNIFI_MONGO_DBNAME}_stat\"
+		}
+	]});"
+"${mongo[@]}" "${UNIFI_MONGO_DBNAME}" --eval "${__SCRIPT__}"
