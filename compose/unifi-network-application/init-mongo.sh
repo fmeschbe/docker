@@ -22,7 +22,7 @@ file_env 'UNIFI_MONGO_USER'
 file_env 'UNIFI_MONGO_PASS'
 
 echo "Creating user ${UNIFI_MONGO_USER}"
-_SCRIPT__="db.createUser({
+__SCRIPT__="db.createUser({
 	  user: \"${UNIFI_MONGO_USER}\",
 	  pwd: \"${UNIFI_MONGO_PASS}\",
 	  roles: [
