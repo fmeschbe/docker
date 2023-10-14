@@ -14,9 +14,9 @@ volumes:
 
 secrets:
   db_admin_password:
-    file: db_admin_password.txt
+    file: ./db_admin_password.txt
   unifi_password:
-    file: unifi_password.txt
+    file: ./unifi_password.txt
 
 services:
   unifi-network-application:
