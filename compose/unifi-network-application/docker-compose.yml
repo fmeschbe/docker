@@ -31,7 +31,7 @@ services:
       - MONGO_PORT=27017
       - MONGO_DBNAME=${UNIFI_MONGO_DBNAME:?Mongo DB name is required}
       - MONGO_USER=${UNIFI_MONGO_USER:?Mongo DB User is required}
-      - MONGO_PASS_FILE=${UNIFI_MONGO_PASS_FILE?Mongo DB Password is required}
+      - FILE__MONGO_PASS=${UNIFI_MONGO_PASS_FILE?Mongo DB Password is required}
       - MEM_LIMIT=1024 #optional
       - MEM_STARTUP=1024 #optional
       - VIRTUAL_HOST=unifi.meschberger.ch
