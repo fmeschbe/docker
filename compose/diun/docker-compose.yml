@@ -16,8 +16,8 @@ services:
     hostname: diun-fixit
     command: serve
     volumes:
-      - "data:/data"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - ${VOLUME_ROOT}data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       TZ: "Europe/Zurich"
       LOG_LEVEL: "info"
