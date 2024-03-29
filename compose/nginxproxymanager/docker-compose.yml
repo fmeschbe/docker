@@ -38,8 +38,8 @@ services:
       # Uncomment this if IPv6 is not enabled on your host
       DISABLE_IPV6: 'true'
     volumes:
-      - nginx:/data
-      - letsencrypt:/etc/letsencrypt
+      - ${VOLUME_ROOT}nginx:/data
+      - ${VOLUME_ROOT}letsencrypt:/etc/letsencrypt
     networks:
       - default
       - db
@@ -54,6 +54,6 @@ services:
       MYSQL_USER: 'npm'
       MYSQL_PASSWORD: 'npm'
     volumes:
-      - mariadb:/var/lib/mysql
+      - ${VOLUME_ROOT}mariadb:/var/lib/mysql
     networks:
       - db
