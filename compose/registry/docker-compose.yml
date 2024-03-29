@@ -35,5 +35,6 @@ services:
       SCRIPT_NAME: "/browser"
       DOCKER_REGISTRY_URL: http://registry:5000
       PUBLIC_REGISTRY_URL: registry.meschberger.ch
+      SECRET_KEY_BASE: "${SECRET_KEY_BASE:?Missing value for SECRET_KEY_BASE - terminating}"
     depends_on:
       - registry
