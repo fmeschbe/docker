@@ -2,7 +2,7 @@ version: "3.8"
 
 networks:
   default:
-    name: dmz
+    name: overland
     external: true
 
 volumes:
@@ -10,7 +10,6 @@ volumes:
 
 services:
   registry:
-    container_name: registry
     image: registry:2
     restart: unless-stopped
     ports:
@@ -23,7 +22,6 @@ services:
       - ${VOLUME_ROOT}registry:/var/lib/registry
 
   registry_browser:
-    container_name: registry-browser
     restart: unless-stopped
     image: klausmeyer/docker-registry-browser:latest
     ports:
